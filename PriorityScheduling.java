@@ -1,97 +1,61 @@
+import java.io.*;
 import java.util.*;
 
-class Process {
-    int at, bt, pr, pno;
-
-    Process(int pno, int at, int bt, int pr) {
-        this.pno = pno;
-        this.pr = pr;
-        this.at = at;
-        this.bt = bt;
-    }
-}
-
 public class PriorityScheduling {
-    static final int totalprocess = 5;
-    static Process proc[] = new Process[totalprocess];
-
-    static boolean comp(Process a, Process b) {
-        if (a.at == b.at) {
-            return a.pr < b.pr;
-        } else {
-            return a.at < b.at;
-        }
+  public static void main(String args[]) {
+    int n, sum = 0;
+    float total_tt = 0, total_waiting = 0;
+    Scanner s = new Scanner(System.in);
+    System.out.println("Enter Number Of Processes You Want To Execute:");
+    n = s.nextInt();
+    int arrival[] = new int[n];
+    int cpu[] = new int[n];
+    int pri[] = new int[n];
+    int finish[] = new int[n];
+    int turntt[] = new int[n];
+    int wait[] = new int[n];
+    int process[] = new int[n];
+    for (int i = 0; i < n; i++) {
+      System.out.println("Enter arrival time of Process " + (i + 1) + ": ");
+      arrival[i] = s.nextInt();
+      System.out.println("Enter CPU time of Process " + (i + 1) + ": ");
+      cpu[i] = s.nextInt();
+      System.out.println("Enter Priority of Process " + (i + 1) + ": ");
+      pri[i] = s.nextInt();
+      process[i] = i + 1;
     }
-
-    static void get_wt_time(int wt[]) {
-        int service[] = new int[totalprocess];
-        service[0] = proc[0].at;
-        wt[0] = 0;
-
-        for (int i = 1; i < totalprocess; i++) {
-            service[i] = proc[i - 1].bt + service[i - 1];
-            wt[i] = service[i] - proc[i].at;
-            if (wt[i] < 0) {
-                wt[i] = 0;
-            }
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = i + 1; j < n; j++) {
+        if (pri[i] > pri[j]) {
+          int temp = cpu[i];
+          cpu[i] = cpu[j];
+          cpu[j] = temp;
+          temp = process[i];
+          process[i] = process[j];
+          process[j] = temp;
+          temp = pri[i];
+          pri[i] = pri[j];
+          pri[j] = temp;
         }
+      }
     }
-
-    static void get_tat_time(int tat[], int wt[]) {
-        for (int i = 0; i < totalprocess; i++) {
-            tat[i] = proc[i].bt + wt[i];
-        }
+    for (int i = 0; i < n; i++) {
+      sum += cpu[i];
+      finish[i] = sum;
     }
-
-    static void findgc() {
-        int wt[] = new int[totalprocess];
-        int tat[] = new int[totalprocess];
-        double wavg = 0, tavg = 0;
-
-        get_wt_time(wt);
-        get_tat_time(tat, wt);
-
-        int stime[] = new int[totalprocess];
-        int ctime[] = new int[totalprocess];
-
-        stime[0] = proc[0].at;
-        ctime[0] = stime[0] + tat[0];
-
-        for (int i = 1; i < totalprocess; i++) {
-            stime[i] = ctime[i - 1];
-            ctime[i] = stime[i] + tat[i] - wt[i];
-        }
-
-        System.out.println("Process_no\tStart_time\tComplete_time\tTurn_Around_Time\tWaiting_Time");
-
-        for (int i = 0; i < totalprocess; i++) {
-            wavg += wt[i];
-            tavg += tat[i];
-
-            System.out.println(proc[i].pno + "\t\t" + stime[i] + "\t\t" + ctime[i] + "\t\t" + tat[i] + "\t\t\t" + wt[i]);
-        }
-
-        System.out.println("Average waiting time is : " + wavg / totalprocess);
-        System.out.println("Average turnaround time : " + tavg / totalprocess);
+    for (int i = 0; i < n; i++) {
+      turntt[i] = finish[i] - arrival[i];
+      total_tt += turntt[i];
+      wait[i] = turntt[i] - cpu[i];
+      total_waiting += wait[i];
     }
-
-    public static void main(String[] args) {
-        int arrivaltime[] = {1, 2, 3, 4, 5};
-        int bursttime[] = {3, 5, 1, 7, 4};
-        int priority[] = {3, 4, 1, 7, 8};
-
-        for (int i = 0; i < totalprocess; i++) {
-            proc[i] = new Process(i + 1, arrivaltime[i], bursttime[i], priority[i]);
-        }
-
-        Arrays.sort(proc, (a, b) -> {
-            if (a.at == b.at) {
-                return a.pr - b.pr;
-            } else {
-                return a.at - b.at;
-            }
-        });
-
-        findgc();
+    System.out.println("\n\nProcess\t\tAT\tCPU_T\tPriority");
+    for (int i = 0; i < n; i++) {
+      System.out.println(
+          process[i] + "\t\t" + arrival[i] + "\t" + cpu[i] + "\t" + pri[i]);
     }
+    System.out.println("\n\n");
+    System.out.println("Average Turnaround Time: " + (total_tt / n));
+    System.out.println("Average Waiting Time: " + (total_waiting / n));
+  }
 }

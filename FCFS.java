@@ -1,68 +1,42 @@
+import java.io.*;
 import java.util.*;
 
 public class FCFS {
-    public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the number of processes: ");
-        int n = sc.nextInt();
-        int pid[] = new int[n]; // process ids
-        int ar[] = new int[n];  // arrival times
-        int bt[] = new int[n];  // burst times
-        int ct[] = new int[n];  // completion times
-        int ta[] = new int[n];  // turnaround times
-        int wt[] = new int[n];  // waiting times
-        int remaining_bt[] = new int[n];  // remaining burst times
-        boolean isCompleted[] = new boolean[n];  // process completion flags
-        int currentTime = 0, completed = 0, prev = 0;
-        float avgwt = 0, avgta = 0;
-        // Input the arrival and burst times
-        for (int i = 0; i < n; i++) {
-            System.out.println("Enter process " + (i + 1) + " arrival time: ");
-            ar[i] = sc.nextInt();
-            System.out.println("Enter process " + (i + 1) + " burst time: ");
-            bt[i] = sc.nextInt();
-            pid[i] = i + 1;
-            remaining_bt[i] = bt[i];  // Initialize remaining burst time
-            isCompleted[i] = false;   // Initially, all processes are incomplete
-        }
-        while (completed != n) {
-            int idx = -1;
-            int minRemainingTime = Integer.MAX_VALUE;
-            // Find the process with the shortest remaining time that has arrived
-            for (int i = 0; i < n; i++) {
-                if (ar[i] <= currentTime && !isCompleted[i] && remaining_bt[i] < minRemainingTime) {
-                    minRemainingTime = remaining_bt[i];
-                    idx = i;
-                }
-            }
-            // If no process is found, increment the time
-            if (idx == -1) {
-                currentTime++;
-            } else {
-                // Process the selected process for 1 time unit
-                remaining_bt[idx]--;
-                currentTime++;
-                // If the process is completed
-                if (remaining_bt[idx] == 0) {
-                    ct[idx] = currentTime; // Completion time
-                    ta[idx] = ct[idx] - ar[idx];  // Turnaround time
-                    wt[idx] = ta[idx] - bt[idx];  // Waiting time
-
-                    avgwt += wt[idx]; // Accumulate waiting time
-                    avgta += ta[idx]; // Accumulate turnaround time
-
-                    isCompleted[idx] = true; // Mark process as completed
-                    completed++;
-                }
-            }
-        }
-        // Print the results
-        System.out.println("\nPID  Arrival  Burst  Completion  Turnaround  Waiting");
-        for (int i = 0; i < n; i++) {
-            System.out.println(pid[i] + "    \t " + ar[i] + "\t" + bt[i] + "\t" + ct[i] + "\t" + ta[i] + "\t" + wt[i]);
-        }
-        sc.close();
-        System.out.println("\nAverage waiting time: " + (avgwt / n));   // Average waiting time
-        System.out.println("Average turnaround time: " + (avgta / n));  // Average turnaround time
+  public static void main(String args[]) {
+    int n, sum = 0;
+    float total_tt = 0, total_waiting = 0;
+    Scanner s = new Scanner(System.in);
+    System.out.println("Enter Number Of Processes You Want To Execute:");
+    n = s.nextInt();
+    int arrival[] = new int[n];
+    int cpu[] = new int[n];
+    int finish[] = new int[n];
+    int turntt[] = new int[n];
+    int wait[] = new int[n];
+    int process[] = new int[n];
+    for (int i = 0; i < n; i++) {
+      System.out.println("Enter arrival time of Process " + (i + 1) + ": ");
+      arrival[i] = s.nextInt();
+      System.out.println("Enter CPU time of Process " + (i + 1) + ": ");
+      cpu[i] = s.nextInt();
+      process[i] = i + 1;
     }
+    for (int i = 0; i < n; i++) {
+      sum += cpu[i];
+      finish[i] = sum;
+    }
+    for (int i = 0; i < n; i++) {
+      turntt[i] = finish[i] - arrival[i];
+      total_tt += turntt[i];
+      wait[i] = turntt[i] - cpu[i];
+      total_waiting += wait[i];
+    }
+    System.out.println("\n\nProcess\t\tAT\tCPU_T");
+    for (int i = 0; i < n; i++) {
+      System.out.println(process[i] + "\t\t" + arrival[i] + "\t" + cpu[i]);
+    }
+    System.out.println("\n\n");
+    System.out.println("Average Turnaround Time: " + (total_tt / n));
+    System.out.println("Average Waiting Time: " + (total_waiting / n));
+  }
 }

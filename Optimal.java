@@ -1,62 +1,62 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-class Optimal {
-	static boolean search(int key, int[] fr)
-	{
-		for (int i = 0; i < fr.length; i++)
-			if (fr[i] == key)
-				return true;
-		return false;
-	}
+public class Optimal {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-	static int predict(int pg[], int[] fr, int pn,
-					int index)
-	{
-		int res = -1, farthest = index;
-		for (int i = 0; i < fr.length; i++) {
-			int j;
-			for (j = index; j < pn; j++) {
-				if (fr[i] == pg[j]) {
-					if (j > farthest) {
-						farthest = j;
-						res = i;
-					}
-					break;
-				}
-			}
-			if (j == pn)
-				return i;
-		}
-		return (res == -1) ? 0 : res;
-	}
+        System.out.print("Enter the number of frames: ");
+        int frameCount = sc.nextInt();
 
-	static void optimalPage(int pg[], int pn, int fn)
-	{
-		int[] fr = new int[fn];
-		int hit = 0;
-		int index = 0;
-		for (int i = 0; i < pn; i++) {
-			if (search(pg[i], fr)) {
-				hit++;
-				continue;
-			}
-			if (index < fn)
-				fr[index++] = pg[i];
-			else {
-				int j = predict(pg, fr, pn, i + 1);
-				fr[j] = pg[i];
-			}
-		}
-		System.out.println("No. of hits = " + hit);
-		System.out.println("No. of misses = " + (pn - hit));
-	}
+        System.out.print("Enter the number of pages: ");
+        int pageCount = sc.nextInt();
+        
+        int[] pages = new int[pageCount];
+        System.out.print("Enter the page references: ");
+        for (int i = 0; i < pageCount; i++) {
+            pages[i] = sc.nextInt();
+        }
 
-	public static void main(String[] args)
-	{
-		int pg[] = { 1,2,2,1,3,5 };
-		int pn = pg.length;
-		int fn = 2;
-		optimalPage(pg, pn, fn);
-	}
+        List<Integer> frames = new ArrayList<>();
+        int pageFaults = 0;
+
+        for (int i = 0; i < pageCount; i++) {
+            int page = pages[i];
+            if (!frames.contains(page)) {
+                if (frames.size() < frameCount) {
+                    frames.add(page);
+                } else {
+                    int replaceIndex = findOptimalIndex(frames, pages, i + 1);
+                    frames.set(replaceIndex, page);
+                }
+                pageFaults++;
+            }
+            System.out.println("Frames after accessing page " + page + ": " + frames);
+        }
+
+        System.out.println("Total page faults: " + pageFaults);
+    }
+
+    private static int findOptimalIndex(List<Integer> frames, int[] pages, int startIndex) {
+        int maxIndex = -1;
+        int farthest = startIndex;
+
+        for (int i = 0; i < frames.size(); i++) {
+            int j;
+            for (j = startIndex; j < pages.length; j++) {
+                if (frames.get(i) == pages[j]) {
+                    if (j > farthest) {
+                        farthest = j;
+                        maxIndex = i;
+                    }
+                    break;
+                }
+            }
+            if (j == pages.length) {
+                return i;
+            }
+        }
+        return maxIndex != -1 ? maxIndex : 0;
+    }
 }
