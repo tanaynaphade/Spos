@@ -36,13 +36,12 @@ public class ASPass {
     }
 
     static void parseToken(String tt, StringTokenizer st, PrintWriter p) {
-        int flag = Arrays.asList(IS).contains(tt) ? 1 : 0;
         int i = Arrays.asList(AD).indexOf(tt); if (i >= 0) p.print("AD " + (i + 1) + " ");
         i = Arrays.asList(IS).indexOf(tt); if (i >= 0) p.print("IS " + (i + 1) + " ");
         i = Arrays.asList(UserReg).indexOf(tt); if (i >= 0) p.print((i + 1) + " ");
         i = Arrays.asList(DL).indexOf(tt); if (i >= 0) p.print("DL " + (i + 1) + " ");
         
-        if (tt.length() == 1 && flag == 1) {
+        if (tt.length() == 1) {
             addOrRetrieveSymbol(tt, p);
         } else if (tt.length() == 1 && st.hasMoreTokens()) {
             p.print(tt + " ");

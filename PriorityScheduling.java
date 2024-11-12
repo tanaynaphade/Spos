@@ -36,6 +36,9 @@ public class PriorityScheduling {
           temp = pri[i];
           pri[i] = pri[j];
           pri[j] = temp;
+          temp = arrival[i];
+          arrival[i] = arrival[j];
+          arrival[j] = temp;
         }
       }
     }
