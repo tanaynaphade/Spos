@@ -1,19 +1,17 @@
-package Pass1;
-
 import java.io.*;
 import java.util.*;
 
-public class pass1 {
+public class ASPass {
     static int address = 0, lc = 0, scount = 0, lcount = 0;
     static int[] sadd = new int[10], ladd = new int[10];
     static String[] IS = { "ADD", "SUB", "MUL", "MOV" }, UserReg = { "AREG", "BREG", "CREG", "DREG" }, AD = { "START", "END" }, DL = { "DC", "DS" };
     static String[] sv = new String[10], lv = new String[10];
 
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\initial.txt"));
-             PrintWriter p = new PrintWriter(new File("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\IM.txt"));
-             PrintWriter p1 = new PrintWriter(new File("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\ST.txt"));
-             PrintWriter p2 = new PrintWriter(new File("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\LT.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\initial.txt"));
+             PrintWriter p = new PrintWriter(new File("C:\\Users\\tanay\\Downloads\\Spos\\IM.txt"));
+             PrintWriter p1 = new PrintWriter(new File("C:\\Users\\tanay\\Downloads\\Spos\\ST.txt"));
+             PrintWriter p2 = new PrintWriter(new File("C:\\Users\\tanay\\Downloads\\Spos\\LT.txt"))) {
 
             String input;
             while ((input = br.readLine()) != null) {
