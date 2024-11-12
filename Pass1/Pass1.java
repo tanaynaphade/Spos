@@ -23,8 +23,8 @@ class Pass {
         String line;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\Pass1\\sample.txt"));
-            BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\Pass1\\output.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\sample.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\output.txt"));
 
             while ((line = br.readLine()) != null && !end) {
                 String[] tokens = line.split(" ", 4);
@@ -190,7 +190,7 @@ class Pass {
         }
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\Pass1\\output.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\Pass1\\output.txt"));
             System.out.println("\n** Output.txt **\n");
             while ((line = br.readLine()) != null)
                 System.out.println(line);

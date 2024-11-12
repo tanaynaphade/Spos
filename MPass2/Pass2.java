@@ -12,7 +12,7 @@ int macro_addr=-1;
 boolean macro_start=false,macro_end=false;
 int macro_call=-1;
 int mdt_cnt=0,mnt_cnt=0,formal_arglist_cnt=0,actual_arglist_cnt=0,temp_cnt=0,temp_cnt1=0;
-BufferedReader br1=new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass2\\mnt.txt"));
+BufferedReader br1=new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\MPass2\\mnt.txt"));
 String line;
 while((line= br1.readLine()) !=null)
 {
@@ -24,7 +24,7 @@ System.out.println("\n\t*************MACRO NAME TABLE***************");
 System.out.println("\n\tINDEX\tNAME\tADDRESS\tTOTAL ARGUMENTS");
 for(int i=0;i<mnt_cnt;i++)
 System.out.println("\t"+i+"\t"+MNT[i].name+"\t"+MNT[i].addr+"\t\t"+MNT[i].arg_cnt);
-br1=new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass2\\argment.txt"));
+br1=new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\MPass2\\argment.txt"));
 while((line=br1.readLine())!=null)
 {
 String[] parameters=line.split("\\s+");
@@ -37,7 +37,7 @@ System.out.println("\n\n\t*************FORMAL ARGUMENT LIST*********");
 System.out.println("\n\tINDEX\tNAME\tVALUE");
 for(int i=0;i<formal_arglist_cnt;i++)
 System.out.println("\t"+i+"\t"+formal_parameter[i].argname+"\t"+formal_parameter[i].value);
-br1=new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass2\\mdt.txt"));
+br1=new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\MPass2\\mdt.txt"));
 while((line=br1.readLine())!=null)
 {
 MDT[mdt_cnt]=new mdt();
@@ -48,8 +48,8 @@ System.out.println("\n\t**************MACRO DEFINITION TABLE************");
 System.out.println("\n\tINDEX\t\tSTATEMENT");
 for(int i=0;i<mdt_cnt;i++)
 System.out.println("t"+i+"\t"+MDT[i].stmnt);
-br1=new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass2\\input.txt"));
-BufferedWriter bw1=new BufferedWriter(new FileWriter("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass2\\output.txt"));
+br1=new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\MPass2\\input.txt"));
+BufferedWriter bw1=new BufferedWriter(new FileWriter("C:\\Users\\tanay\\Downloads\\Spos\\MPass2\\output.txt"));
 while((line=br1.readLine())!=null)
 {
 line=line.replaceAll(",", " ");

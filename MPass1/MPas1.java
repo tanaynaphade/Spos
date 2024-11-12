@@ -4,7 +4,7 @@ import java.io.*;
 
 public class MPas1 {
     public static void main(String[] args) throws IOException {
-        BufferedReader br1 = new BufferedReader(new FileReader("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass1\\input.txt"));
+        BufferedReader br1 = new BufferedReader(new FileReader("C:\\Users\\tanay\\Downloads\\Spos\\MPass1\\input.txt"));
         String line;
         mdt[] MDT = new mdt[20];
         mnt[] MNT = new mnt[4];
@@ -62,7 +62,7 @@ public class MPas1 {
             }
         }
         br1.close();
-        BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass1\\mnt.txt"));
+        BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:\\Users\\tanay\\Downloads\\Spos\\MPass1\\mnt.txt"));
         System.out.println("\n\n*****MACRO NAME TABLE*****");
         System.out.println("\n\tINDEX\tNAME\tADDRESS");
         for (int i = 0; i < mnt_cnt; i++) {
@@ -70,7 +70,7 @@ public class MPas1 {
             bw1.write(MNT[i].name + "\t" + MNT[i].addr + "\n");
         }
         bw1.close();
-        bw1 = new BufferedWriter(new FileWriter("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass1\\arglist.txt"));
+        bw1 = new BufferedWriter(new FileWriter("C:\\Users\\tanay\\Downloads\\Spos\\MPass1\\arglist.txt"));
         System.out.println("\n\n*****ARGUMENT LIST*****");
         System.out.println("\n\tINDEX\tNAME\tADDRESS");
         for (int i = 0; i < arglist_cnt; i++) {
@@ -80,7 +80,7 @@ public class MPas1 {
         bw1.close();
         System.out.println("\n\n*****MACRO DEFINATION TABLE*****");
         System.out.println("\n\tINDEX\tSTATEMENT");
-        bw1 = new BufferedWriter(new FileWriter("C:\\Users\\Paras\\OneDrive\\Desktop\\LP1\\SPOS\\MPass1\\mdt.txt"));
+        bw1 = new BufferedWriter(new FileWriter("C:\\Users\\tanay\\Downloads\\Spos\\MPass1\\mdt.txt"));
         for (int i = 0; i < mdt_cnt; i++) {
             System.out.println("\t" + i + "\t" + MDT[i].stmnt);
             bw1.write(MDT[i].stmnt + "\n");
