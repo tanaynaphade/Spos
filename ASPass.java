@@ -73,7 +73,7 @@ public class ASPass {
     }
 
     static void printTables(PrintWriter p1, PrintWriter p2) {
-        for (int i = 0; i < scount; i++) p1.println(i + "\t" + sv[i] + "\t" + sadd[i]);
+        for (int i = 0; i < scount; i++) p1.println("S" + i + "\t" + sv[i] + "\t" + sadd[i]);
         for (int i = 0; i < lcount; i++) { ladd[i] = address++; p2.println(i + "\t" + lv[i] + "\t" + ladd[i]); }
     }
 }
