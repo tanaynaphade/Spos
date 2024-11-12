@@ -37,15 +37,12 @@ public class RoundRobin {
                     } else {
                         currentTime += remainingTime[i];
                         waitingTime[i] = currentTime - burstTime[i];
+                        turnaroundTime[i] = currentTime;
                         remainingTime[i] = 0;
                     }
                 }
             }
         } while (!done);
-
-        for (int i = 0; i < n; i++) {
-            turnaroundTime[i] = burstTime[i] + waitingTime[i];
-        }
 
         System.out.println("\nProcess\tBurst Time\tWaiting Time\tTurnaround Time");
         for (int i = 0; i < n; i++) {
