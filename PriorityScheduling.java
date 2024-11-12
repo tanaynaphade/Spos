@@ -26,7 +26,7 @@ public class PriorityScheduling {
     }
     for (int i = 0; i < n - 1; i++) {
       for (int j = i + 1; j < n; j++) {
-        if (pri[i] > pri[j]) {
+        if (arrival[i] > arrival[j] || (arrival[i] == arrival[j]) && pri[i] > pri[j]) {
           int temp = cpu[i];
           cpu[i] = cpu[j];
           cpu[j] = temp;

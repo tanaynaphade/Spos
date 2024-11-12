@@ -23,7 +23,7 @@ public class SJF {
     }
     for (int i = 0; i < n - 1; i++) {
       for (int j = i + 1; j < n; j++) {
-        if (cpu[i] > cpu[j]) {
+        if (arrival[i] > arrival[j] || (arrival[i] == arrival[j]) && cpu[i] > cpu[j]) {
           int temp = cpu[i];
           cpu[i] = cpu[j];
           cpu[j] = temp;
